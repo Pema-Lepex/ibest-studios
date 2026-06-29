@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../../node_modules/react-tailwindcss-datepicker/dist/index.esm.js";
 
 :root {
   --background: #ffffff;
@@ -11,14 +12,67 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
+@theme {
+  /* --- CUSTOM BREAKPOINTS / SCREENS --- */
+  --breakpoint-8k: 7680px;
+  --breakpoint-tv-wide: 4096px;
+  --breakpoint-6xl: 3840px;
+  --breakpoint-5xl: 3200px;
+  --breakpoint-4xl: 2560px;
+  --breakpoint-3xl: 1920px;
+  --breakpoint-2xl: 1536px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-md: 768px;
+  --breakpoint-sm: 640px;
+  --breakpoint-xs: 480px;
 
+  /* --- CUSTOM ANIMATIONS --- */
+  --animate-spin: spin 1s linear infinite;
+  --animate-fadeIn: fade-in 0.5s ease forwards;
+
+  /* --- CUSTOM KEYFRAMES --- */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes fade-in {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* --- CUSTOM COLORS --- */
+  --color-primary-50: #F2F5F6;
+  --color-primary-100: #E6EBEE;
+  --color-primary-200: #C0CED4;
+  --color-primary-300: #99B0BB;
+  --color-primary-400: #4D7487;
+  --color-primary-500: #013954;
+  --color-primary-600: #01334C;
+  --color-primary-700: #012232;
+  --color-primary-800: #001A26;
+  --color-primary-900: #001119;
+
+  /* Typo fixed: customOriange -> customOrange */
+  --color-customOrange-100: #FFA202;
+  --color-customOrange-200: #F34800;
+  
+  --color-light-brown: #C4A484;
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
-
+@utility hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+  
+  &::-webkit-scrollbar {
+    display: none;           /* Chrome, Safari, and Opera */
+  }
+}
 body {
   background: var(--background);
   color: var(--foreground);
