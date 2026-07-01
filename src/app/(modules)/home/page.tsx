@@ -5,3 +5,4 @@ const HomePage: React.FC = () => {
   return <MainHome />;
 };
 export default HomePage;
+

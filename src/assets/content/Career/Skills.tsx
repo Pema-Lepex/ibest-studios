@@ -1,3 +1,25 @@
+export const JobIntro = {
+  paragraphs: [
+    `At iBEST, we believe that our people make the company; therefore, our success depends on our people’s collective capacities and effort. We believe in teamwork. We strive for excellence in our work. We enjoy and love what we do and take immense pride in our works!`,
+    `So, if you are passionate about giving wings to your imagination, here is an opportunity of a lifetime!`,
+    `As a creative multimedia company, iBEST STUDIOS has an adept production team of creative directors, animators, illustrators, designers, artists, and many more. Once you are in our team, we provide a guided learning and access insights from our senior colleagues’ massive pool of expertise and experiences.`,
+    `We are looking for creative mavericks and raw talent who believe that creativity is unlimited!`,
+    `If you are skilled enough, then right away after the selection process, we will OFFER you a vocation at our firm. Others who are selected for the internship, after three months interning with us, then we will offer the job based on your performance.`,
+    `We are looking forward to working with you. We demand the “I can do and will do” attitude and a deep sense of ownership and accountability towards your work. If you are a team player, with the utmost integrity in your work, and treat others with respect and empathy - we would love to have you in our iBEST family!`,
+  ],
+};
+
+export const CandidateNotes = {
+  title: "IMPORTANT NOTES FOR CANDIDATES",
+  intro: "Follow the link below to apply.",
+  email: "infoibeststudios@gmail.com",
+  emailHref:
+    "https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=infoibeststudios@gmail.com",
+  noteBefore: "Applicable to Bhutanese and individuals residing in Bhutan only.",
+  noteAfter:
+    "Application will be accepted strictly ONLINE. No need of travelling to our firm to submit the application.",
+};
+
 export const WeArelookingFor = {
   title: "We're Looking For Creative Talent",
   subTitle:

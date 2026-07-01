@@ -1,0 +1,10 @@
+export { default as affortable } from "./affortable.svg";
+export { default as Approve } from "./Approve.svg";
+export { default as checheyGame } from "./checheyGame.svg";
+export { default as educareKids } from "./educareKids.svg";
+export { default as gameIcon } from "./gameIcon.svg";
+export { default as InteractiveLearning } from "./InteractiveLearning.svg";
+export { default as intermidateLevel } from "./intermidateLevel.svg";
+export { default as personalize } from "./personalize.svg";
+export { default as primaryLevel } from "./primaryLevel.svg";
+export { default as QualityLearning } from "./QualityLearning.svg";
