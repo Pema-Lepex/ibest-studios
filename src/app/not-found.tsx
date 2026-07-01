@@ -5,7 +5,7 @@ import React from "react";
 
 const PageNotFound: React.FC = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#F2F5F6] text-center px-6">
+    <div className="flex flex-col items-center justify-center min-h-screen text-center px-6">
       <h1 className="text-9xl font-extrabold text-[#013954] drop-shadow-lg">
         404
       </h1>
