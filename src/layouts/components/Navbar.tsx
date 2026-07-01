@@ -2,52 +2,62 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { StudiosLogo } from "@/assets";
+import Image from "next/image";
 
-const navLinks = [
+const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
-  { label: "Work", href: "/work" },
-  { label: "Blog", href: "/blog" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl  rounded-b-lg
-        ${scrolled
-          ? "bg-black/75 border-b border-white/[0.08] shadow-[0_4px_32px_rgba(0,0,0,0.25)]"
-          : "bg-black/35 border-b border-transparent"
-        }`}
-    >
-      <div className=" px-6 h-16 flex items-center justify-between">
+  // Lock body scroll when the mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
+  return (
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+        scrolled
+          ? "bg-white/70 backdrop-blur-md shadow-sm border-b border-slate-200"
+          : "bg-white border-b border-transparent"
+      }`}
+    >
+      <nav className="mx-auto flex 5xl:max-w-[3200px] items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 text-white font-bold text-xl tracking-tight no-underline"
+          className="flex items-center gap-2 text-lg font-semibold tracking-tight text-slate-900"
+          onClick={() => setIsOpen(false)}
         >
-          <span className="inline-block w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500" />
-          iBEST Studios
+          <Image src={StudiosLogo} alt="iBEST Studios" width={60} height={60} />
+  
         </Link>
 
-        {/* Desktop Nav Links */}
-        <ul className="hidden md:flex items-center gap-1 list-none m-0 p-0">
-          {navLinks.map((link) => (
+        {/* Desktop links */}
+        <ul className="hidden items-center gap-8 md:flex">
+          {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="block px-4 py-2 rounded-lg text-sm font-medium text-white/70
-                  hover:text-white hover:bg-white/[0.08] transition-all duration-200 no-underline"
+                className="text-sm font-medium text-slate-600 transition-colors hover:text-primary-600"
               >
                 {link.label}
               </Link>
@@ -55,72 +65,71 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Desktop CTA */}
-        <div className="hidden md:flex items-center gap-3">
+        {/* Desktop CTA buttons */}
+        <div className="hidden items-center gap-3 md:flex">
           <Link
-            href="/signup"
-            className="text-sm font-semibold text-white px-5 py-2.5 rounded-xl
-              bg-gradient-to-r from-indigo-500 to-purple-500
-              shadow-[0_0_20px_rgba(99,102,241,0.35)]
-              hover:shadow-[0_0_28px_rgba(99,102,241,0.55)]
-              hover:opacity-90 transition-all duration-200 no-underline"
+            href="/contact"
+            className="rounded-full bg-primary-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary-700"
           >
             Contact
           </Link>
         </div>
 
-        {/* Hamburger (mobile) */}
+        {/* Mobile menu button */}
         <button
-          aria-label="Toggle menu"
-          onClick={() => setMenuOpen((v) => !v)}
-          className="md:hidden flex items-center justify-center p-2 text-white
-            rounded-lg hover:bg-white/10 transition-colors duration-200"
+          type="button"
+          onClick={() => setIsOpen((prev) => !prev)}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isOpen}
+          className="relative flex h-9 w-9 items-center justify-center rounded-md text-slate-700 md:hidden"
         >
-          {menuOpen ? (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          ) : (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <line x1="3" y1="7" x2="21" y2="7" />
-              <line x1="3" y1="12" x2="21" y2="12" />
-              <line x1="3" y1="17" x2="21" y2="17" />
-            </svg>
-          )}
+          <span
+            className={`absolute h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
+              isOpen ? "rotate-45" : "-translate-y-1.5"
+            }`}
+          />
+          <span
+            className={`absolute h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
+              isOpen ? "opacity-0" : "opacity-100"
+            }`}
+          />
+          <span
+            className={`absolute h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
+              isOpen ? "-rotate-45" : "translate-y-1.5"
+            }`}
+          />
         </button>
-      </div>
+      </nav>
 
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="md:hidden px-6 pb-5 pt-3 border-t border-white/[0.07]
-          flex flex-col gap-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              className="block px-3.5 py-2.5 rounded-lg text-[15px] font-medium
-                text-white/80 hover:bg-white/[0.07] transition-colors duration-150 no-underline"
-            >
-              {link.label}
-            </Link>
+      {/* Mobile menu panel */}
+      <div
+        className={`overflow-hidden transition-[max-height] duration-300 ease-in-out md:hidden ${
+          isOpen ? "max-h-96" : "max-h-0"
+        }`}
+      >
+        <ul className="flex flex-col gap-1 border-t border-slate-200 bg-white px-4 pb-4 pt-2">
+          {NAV_LINKS.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="block rounded-md px-3 py-2.5 text-base font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-primary-600"
+              >
+                {link.label}
+              </Link>
+            </li>
           ))}
-          <div className="flex gap-2.5 mt-2">
+          <li className="mt-2 flex flex-col gap-2 border-t border-slate-100 pt-3">
             <Link
-              href="/signup"
-              onClick={() => setMenuOpen(false)}
-              className="flex-1 text-center py-2.5 rounded-xl
-                bg-gradient-to-r from-indigo-500 to-purple-500
-                text-sm font-semibold text-white no-underline"
+              href="/contact"
+              onClick={() => setIsOpen(false)}
+              className="rounded-full bg-primary-600 px-5 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary-700"
             >
               Contact
             </Link>
-          </div>
-        </div>
-      )}
-    </nav>
+          </li>
+        </ul>
+      </div>
+    </header>
   );
 }

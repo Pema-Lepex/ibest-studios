@@ -1,3 +1,4 @@
+import { StudiosLogo } from "@/assets";
 import {
   Heading1,
   Heading2,
@@ -8,6 +9,8 @@ import {
   CommonParagraph3,
   CommonParagraph4,
 } from "@/components";
+import { Home } from "lucide-react";
+import Image from "next/image";
 
 const HomePage: React.FC = () => {
   return (
@@ -31,6 +34,8 @@ const HomePage: React.FC = () => {
       <CommonParagraph4>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </CommonParagraph4>
+      <Image src={StudiosLogo} alt="iBEST Studios" width={320} height={320} />
+      <Home size={24} />
     </div>
   );
 };
