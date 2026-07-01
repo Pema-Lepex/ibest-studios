@@ -2,7 +2,8 @@
 import { Slider1, Slider2, Slider3, Slider15, Slider16 } from "@/assets";
 import Carousel from "@/components/Carousel";
 import { SlideProps } from "@/types/CommonProps";
-import RecentViewSection from "./section/RecentViewSection";
+import RecentNewsSection from "./section/RecentNewsSection";
+import OurStorySection from "./section/OurStorySection";
 
 const MainHome: React.FC = () => {
   const slides: SlideProps[] = [
@@ -14,10 +15,11 @@ const MainHome: React.FC = () => {
   ];
   return (
     <div>
-      <section className="relative space-y-4" id="about-carousel">
+      <section>
         <Carousel slides={slides} />
       </section>
-      <RecentViewSection/>
+      <RecentNewsSection />
+      <OurStorySection />
     </div>
   );
 };
