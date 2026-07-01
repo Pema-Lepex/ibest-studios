@@ -1,0 +1,16 @@
+export { default as Slider1 } from "./1.Tutor.webp";
+export { default as Slider2 } from "./NewDownload&Register.webp";
+export { default as Slider3 } from "./3.MembershipPlan.webp";
+export { default as Slider4 } from "./4.EducareKids.webp";
+export { default as Slider5 } from "./5. CheyCheyGames.webp";
+export { default as Slider6 } from "./6.PrimaryLevel-1.webp";
+export { default as Slider7 } from "./7.Intermediatelevel.webp";
+export { default as Slider8 } from "./8.iBESTOrginals.webp";
+export { default as Slider9 } from "./9.Daza.webp";
+export { default as Slider10 } from "./10.Nono.webp";
+export { default as Slider11 } from "./11.Dr.Carrot.webp";
+export { default as Slider12 } from "./12.FourFriends.webp";
+export { default as Slider13 } from "./13.MKSeries.webp";
+export { default as Slider14 } from "./14.MK&DT.webp";
+export { default as Slider15 } from "./4. No of Content.webp";
+export { default as Slider16 } from "./5. Category.webp";
