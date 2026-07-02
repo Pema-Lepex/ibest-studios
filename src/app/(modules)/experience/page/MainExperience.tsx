@@ -1,8 +1,124 @@
-const MainExperience = () => {
+"use client";
+
+import { useState } from "react";
+import {
+  ExperienceIntro,
+  OurWorks,
+} from "@/assets/content/Experience/Experience";
+
+const PROJECTS_PER_PAGE = 10;
+
+const MainExperience: React.FC = () => {
+  const [page, setPage] = useState(1);
+  const pageCount = Math.ceil(OurWorks.projects.length / PROJECTS_PER_PAGE);
+  const visibleProjects = OurWorks.projects.slice(
+    (page - 1) * PROJECTS_PER_PAGE,
+    page * PROJECTS_PER_PAGE
+  );
+
   return (
-    <div>
-      <h1>Main Experience</h1>
-      <p>This is the main experience page.</p>
+    <div className="mx-auto w-full max-w-5xl 3xl:max-w-7xl px-6 font-open-sans md:px-10">
+      {/* Heading */}
+      <div className="py-12 text-center md:py-16">
+        <h1 className="font-raleway text-2xl uppercase tracking-wide text-gray-800 sm:text-3xl md:text-4xl">
+          {ExperienceIntro.title}
+        </h1>
+        <span className="mx-auto mt-3 block h-1 w-16 bg-accent-blue sm:w-24" />
+      </div>
+
+      {/* Intro + video */}
+      <section className="grid gap-10 pb-16 md:grid-cols-2 md:items-center">
+        <div>
+          <h2 className="mb-4 font-raleway text-xl font-bold text-accent-blue sm:text-2xl">
+            {ExperienceIntro.eyebrow}
+          </h2>
+          <div className="space-y-4">
+            {ExperienceIntro.paragraphs.map((para, i) => (
+              <p key={i} className="leading-relaxed text-body-text">
+                {para}
+              </p>
+            ))}
+          </div>
+        </div>
+        <div className="overflow-hidden rounded-md shadow-sm">
+          <iframe
+            title={ExperienceIntro.videoTitle}
+            src={`https://www.youtube.com/embed/${ExperienceIntro.videoId}`}
+            className="aspect-video w-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      </section>
+
+      {/* Our works */}
+      <section className="py-12 md:py-16">
+        <div className="mb-8 text-center">
+          <h2 className="font-raleway text-xl uppercase tracking-wide text-gray-800 sm:text-2xl md:text-3xl">
+            {OurWorks.title}
+          </h2>
+          <span className="mx-auto mt-3 block h-1 w-12 bg-accent-blue sm:w-16" />
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {visibleProjects.map((project, i) => (
+            <a
+              key={i}
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block overflow-hidden rounded-2xl border border-customOrange-100 bg-white shadow-sm transition-transform hover:-translate-y-1"
+            >
+              <img
+                src={project.image}
+                alt={project.title}
+                className="aspect-video w-full object-cover"
+              />
+              <div className="p-6">
+                <p className="mb-2 font-raleway text-sm font-semibold text-accent-blue">
+                  {project.category}
+                </p>
+                <p className="font-semibold text-body-text">{project.title}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        {/* Pagination */}
+        {pageCount > 1 && (
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
+            <button
+              type="button"
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page === 1}
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-gray-200 text-accent-blue disabled:opacity-40"
+            >
+              «
+            </button>
+            {Array.from({ length: pageCount }, (_, i) => i + 1).map((num) => (
+              <button
+                key={num}
+                type="button"
+                onClick={() => setPage(num)}
+                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-md border text-sm font-medium ${
+                  num === page
+                    ? "border-accent-blue bg-accent-blue text-white"
+                    : "border-gray-200 text-accent-blue"
+                }`}
+              >
+                {num}
+              </button>
+            ))}
+            <button
+              type="button"
+              onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
+              disabled={page === pageCount}
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-gray-200 text-accent-blue disabled:opacity-40"
+            >
+              »
+            </button>
+          </div>
+        )}
+      </section>
     </div>
   );
 };
