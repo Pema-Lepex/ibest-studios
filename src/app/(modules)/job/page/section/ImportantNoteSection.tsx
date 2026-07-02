@@ -32,7 +32,7 @@ const ImportantNoteSection = () => {
                   href={CandidateNotes.emailHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold text-customOrange-200 underline underline-offset-4 hover:opacity-70 break-words"
+                  className="font-semibold text-accent-blue underline underline-offset-4 hover:opacity-70 break-words"
                 >
                    {CandidateNotes.email}
                 </Link>

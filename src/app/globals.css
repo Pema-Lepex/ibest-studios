@@ -11,6 +11,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-open-sans: var(--font-open-sans);
+  --font-raleway: var(--font-raleway);
 }
 @theme {
   /* --- CUSTOM BREAKPOINTS / SCREENS --- */
@@ -58,6 +60,10 @@
   --color-customOrange-200: #F34800;
   
   --color-light-brown: #C4A484;
+
+  /* Accent blue used on the reference ibeststudios.com site (links, underlines) */
+  --color-accent-blue: #1e92c0;
+  --color-body-text: #3f3f3f;
 }
 @utility hide-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
