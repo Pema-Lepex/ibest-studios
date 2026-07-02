@@ -4,6 +4,7 @@ import Carousel from "@/components/Carousel";
 import { SlideProps } from "@/types/CommonProps";
 import RecentNewsSection from "./section/RecentNewsSection";
 import OurStorySection from "./section/OurStorySection";
+import ServiceSection from "../../service/page/section/ServiceSection";
 
 const MainHome: React.FC = () => {
   const slides: SlideProps[] = [
@@ -20,6 +21,7 @@ const MainHome: React.FC = () => {
       </section>
       <RecentNewsSection />
       <OurStorySection />
+      <ServiceSection/>
     </div>
   );
 };

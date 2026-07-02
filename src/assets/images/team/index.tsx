@@ -1,0 +1,1 @@
+export { default as CEOImage } from "./Sir T.webp";
