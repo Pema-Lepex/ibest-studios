@@ -23,23 +23,23 @@ const ContactPage: React.FC = () => {
   return (
     <>
         {/* Heading */}
-        <div className="mb-8 text-center sm:mb-10">
-          <h1 className="text-2xl font-medium uppercase tracking-wide text-gray-800 sm:text-3xl md:text-4xl">
+        <div className="mb-8 text-center sm:mb-10 lg:mb-12">
+          <h1 className="text-2xl font-medium uppercase tracking-wide text-gray-800 sm:text-3xl md:text-4xl lg:text-5xl">
             {ContactPageContent.title}
           </h1>
           <span className="mx-auto mt-3 block h-1 w-16 bg-sky-500 sm:w-24" />
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="w-full space-y-4">
-          <div className="grid gap-4 sm:grid-cols-2">
+        <form onSubmit={handleSubmit} className="w-full space-y-4 lg:space-y-5">
+          <div className="grid gap-4 sm:grid-cols-2 lg:gap-5">
             <input
               required
               name="name"
               value={form.name}
               onChange={handleChange}
               placeholder="Your Name"
-              className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-700 outline-none focus:border-sky-500 sm:px-6 md:px-8"
+              className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-700 outline-none focus:border-sky-500 sm:px-6 md:px-8 lg:py-3 lg:text-lg"
             />
             <input
               required
@@ -48,7 +48,7 @@ const ContactPage: React.FC = () => {
               value={form.email}
               onChange={handleChange}
               placeholder="Your Email"
-              className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-700 outline-none focus:border-sky-500 sm:px-6 md:px-8"
+              className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-700 outline-none focus:border-sky-500 sm:px-6 md:px-8 lg:py-3 lg:text-lg"
             />
           </div>
           <input
@@ -56,7 +56,7 @@ const ContactPage: React.FC = () => {
             value={form.phone}
             onChange={handleChange}
             placeholder="Phone Number"
-            className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-700 outline-none focus:border-sky-500 sm:px-6 md:px-8"
+            className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-700 outline-none focus:border-sky-500 sm:px-6 md:px-8 lg:py-3 lg:text-lg"
           />
           <textarea
             required
@@ -65,11 +65,11 @@ const ContactPage: React.FC = () => {
             onChange={handleChange}
             placeholder="Message"
             rows={4}
-            className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-700 outline-none focus:border-sky-500 sm:px-6 md:px-8"
+            className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-700 outline-none focus:border-sky-500 sm:px-6 md:px-8 lg:py-3 lg:text-lg"
           />
           <button
             type="submit"
-            className="w-full rounded-md bg-red-500 px-10 py-2 font-semibold text-white transition-colors hover:bg-red-600 sm:w-auto"
+            className="w-full rounded-md bg-red-500 px-10 py-2 font-semibold text-white transition-colors hover:bg-red-600 sm:w-auto lg:px-12 lg:py-3 lg:text-lg"
           >
             Send Message
           </button>

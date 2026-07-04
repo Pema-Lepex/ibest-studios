@@ -15,8 +15,8 @@ const JoinOurTeamSection = () => {
           className="block h-auto w-full"
         />
       </div>
-      <div className="mx-auto w-full max-w-4xl px-4 sm:px-6 sm:py-12 lg:px-8 ">
-        <div className="space-y-4 sm:space-y-5">
+      <div className="mx-auto w-full max-w-4xl px-4 sm:px-6 sm:py-12 lg:max-w-5xl lg:px-8 lg:py-16 xl:max-w-6xl xl:py-20 3xl:max-w-7xl">
+        <div className="space-y-4 sm:space-y-5 lg:space-y-6">
           {JobIntro.paragraphs.map((para, i) => (
             <CommonParagraph4 key={i} className="text-gray-800">
               {para}

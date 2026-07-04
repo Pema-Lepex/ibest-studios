@@ -1,9 +1,9 @@
-import ServiceSection from "./section/ServiceSection";
+import ServiceDetailSection from "./section/ServiceDetailSection";
 
 const MainService = () => {
   return (
     <>
-      <ServiceSection/>
+      <ServiceDetailSection/>
     </>
   );
 };

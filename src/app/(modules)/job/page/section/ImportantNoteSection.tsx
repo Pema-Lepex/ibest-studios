@@ -6,20 +6,20 @@ import Link from "next/link";
 
 const ImportantNoteSection = () => {
   return (
-     <section className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 md:py-16">
+     <section className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 sm:py-12 md:py-16 lg:max-w-5xl lg:px-8 lg:py-20 xl:max-w-6xl xl:py-24 3xl:max-w-7xl">
 
         {/* Important notes for candidates */}
-        <section className="mt-10 sm:mt-12">
-          <h2 className="text-base font-bold text-primary-600 sm:text-lg md:text-xl">
+        <section className="mt-10 sm:mt-12 lg:mt-14">
+          <h2 className="text-base font-bold text-primary-600 sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
             {CandidateNotes.title}
           </h2>
-          <hr className="mt-3 mb-4 border-gray-200 sm:mb-5" />
+          <hr className="mt-3 mb-4 border-gray-200 sm:mb-5 lg:mb-6" />
 
           <CommonParagraph4 className="mb-4 text-gray-800">
             {CandidateNotes.intro}
           </CommonParagraph4>
 
-          <ul className="list-disc space-y-2.5 pl-5 marker:text-customOrange-200 sm:space-y-3">
+          <ul className="list-disc space-y-2.5 pl-5 marker:text-customOrange-200 sm:space-y-3 lg:space-y-4">
             <li>
               <CommonParagraph4 className="text-gray-800">
                 {CandidateNotes.noteBefore}
@@ -47,12 +47,12 @@ const ImportantNoteSection = () => {
         </section>
 
         {/* Apply button - small, left aligned */}
-        <div className="mt-8 sm:mt-10">
+        <div className="mt-8 sm:mt-10 lg:mt-12">
           <Link
             href={HowToApply.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center rounded-md bg-customOrange-200 px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-customOrange-100 sm:px-5 sm:text-sm"
+            className="inline-flex items-center rounded-md bg-customOrange-200 px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-customOrange-100 sm:px-5 sm:text-sm lg:px-6 lg:py-3 lg:text-base"
           >
             Apply Here
           </Link>

@@ -17,24 +17,24 @@ const MainExperience: React.FC = () => {
   );
 
   return (
-    <div className="mx-auto w-full max-w-5xl 3xl:max-w-7xl px-6 font-open-sans md:px-10">
+    <div className="mx-auto w-full max-w-5xl px-6 font-open-sans md:px-10 lg:max-w-6xl xl:max-w-7xl 3xl:max-w-[90rem]">
       {/* Heading */}
       <div className="py-12 text-center md:py-16">
-        <h1 className="font-raleway text-2xl uppercase tracking-wide text-gray-800 sm:text-3xl md:text-4xl">
+        <h1 className="font-raleway text-2xl uppercase tracking-wide text-gray-800 sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
           {ExperienceIntro.title}
         </h1>
         <span className="mx-auto mt-3 block h-1 w-16 bg-accent-blue sm:w-24" />
       </div>
 
       {/* Intro + video */}
-      <section className="grid gap-10 pb-16 md:grid-cols-2 md:items-center">
+      <section className="grid gap-10 pb-16 md:grid-cols-2 md:items-center lg:gap-16">
         <div>
-          <h2 className="mb-4 font-raleway text-xl font-bold text-accent-blue sm:text-2xl">
+          <h2 className="mb-4 font-raleway text-xl font-bold text-accent-blue sm:text-2xl lg:text-3xl xl:text-4xl">
             {ExperienceIntro.eyebrow}
           </h2>
           <div className="space-y-4">
             {ExperienceIntro.paragraphs.map((para, i) => (
-              <p key={i} className="leading-relaxed text-body-text">
+              <p key={i} className="leading-relaxed text-body-text lg:text-lg xl:text-xl">
                 {para}
               </p>
             ))}
@@ -54,12 +54,12 @@ const MainExperience: React.FC = () => {
       {/* Our works */}
       <section className="py-12 md:py-16">
         <div className="mb-8 text-center">
-          <h2 className="font-raleway text-xl uppercase tracking-wide text-gray-800 sm:text-2xl md:text-3xl">
+          <h2 className="font-raleway text-xl uppercase tracking-wide text-gray-800 sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
             {OurWorks.title}
           </h2>
           <span className="mx-auto mt-3 block h-1 w-12 bg-accent-blue sm:w-16" />
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4 xl:gap-8">
           {visibleProjects.map((project, i) => (
             <a
               key={i}
@@ -73,11 +73,11 @@ const MainExperience: React.FC = () => {
                 alt={project.title}
                 className="aspect-video w-full object-cover"
               />
-              <div className="p-6">
-                <p className="mb-2 font-raleway text-sm font-semibold text-accent-blue">
+              <div className="p-6 xl:p-7">
+                <p className="mb-2 font-raleway text-sm font-semibold text-accent-blue lg:text-base">
                   {project.category}
                 </p>
-                <p className="font-semibold text-body-text">{project.title}</p>
+                <p className="font-semibold text-body-text lg:text-lg">{project.title}</p>
               </div>
             </a>
           ))}
@@ -90,7 +90,7 @@ const MainExperience: React.FC = () => {
               type="button"
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-gray-200 text-accent-blue disabled:opacity-40"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-gray-200 text-accent-blue disabled:opacity-40 lg:h-11 lg:w-11 lg:text-lg"
             >
               «
             </button>
@@ -99,7 +99,7 @@ const MainExperience: React.FC = () => {
                 key={num}
                 type="button"
                 onClick={() => setPage(num)}
-                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-md border text-sm font-medium ${
+                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-md border text-sm font-medium lg:h-11 lg:w-11 lg:text-base ${
                   num === page
                     ? "border-accent-blue bg-accent-blue text-white"
                     : "border-gray-200 text-accent-blue"
@@ -112,7 +112,7 @@ const MainExperience: React.FC = () => {
               type="button"
               onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
               disabled={page === pageCount}
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-gray-200 text-accent-blue disabled:opacity-40"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-gray-200 text-accent-blue disabled:opacity-40 lg:h-11 lg:w-11 lg:text-lg"
             >
               »
             </button>
