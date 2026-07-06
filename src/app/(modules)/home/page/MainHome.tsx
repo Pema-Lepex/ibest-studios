@@ -16,13 +16,13 @@ const MainHome: React.FC = () => {
     { id: 5, img: Slider16, title: "Mountain Adventure" },
   ];
   return (
-    <div>
+    <div className="flex flex-col gap-8 sm:gap-10 md:gap-14 lg:gap-16">
       <section>
         <Carousel slides={slides} />
       </section>
       <RecentNewsSection />
       <OurStorySection />
-      <ServiceSection/>
+      <ServiceSection />
       <OurWorksSection />
     </div>
   );

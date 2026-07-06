@@ -10,7 +10,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <>
       <Navbar />
-      <main className="mx-auto 5xl:max-w-[3200px]">{children}</main>
+      <main>{children}</main>
       <Footer />
     </>
   );

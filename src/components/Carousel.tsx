@@ -31,37 +31,24 @@ const Carousel: React.FC<Props> = ({ slides = [] }) => {
   const nextIndex = currentIndex === slides.length - 1 ? 0 : currentIndex + 1;
 
   return (
-    <div className="w-full m-auto relative group ">
-      <div className="w-full overflow-hidden">
-        import Image from "next/image";
-        <div className="w-full overflow-hidden rounded-xl">
-          {slides.map((slide, index) => (
-            <Image
-              key={index}
-              src={slide.img}
-              alt={slide.title || `Slide ${index + 1}`}
-              width={1920}
-              height={1080}
-              priority={index === 0}
-              className={`
-        absolute inset-0
-        w-full h-auto
+    <div className="w-full relative group">
+      <div className="relative w-full overflow-hidden aspect-[16/10] xs:aspect-[16/9] md:aspect-[21/9] 3xl:aspect-[32/9]">
+        {slides.map((slide, index) => (
+          <Image
+            key={index}
+            src={slide.img}
+            alt={slide.title || `Slide ${index + 1}`}
+            fill
+            priority={index === 0}
+            sizes="100vw"
+            className={`
         object-cover
         transition-opacity duration-700 ease-in-out
         ${index === currentIndex ? "opacity-100" : "opacity-0"}
       `}
-            />
-          ))}
-
-          {/* Keeps the container height */}
-          <Image
-            src={slides[0].img}
-            alt=""
-            width={1920}
-            height={1080}
-            className="opacity-0"
           />
-        </div>
+        ))}
+
         {/* Hidden preload for the next slide */}
         <link
           rel="preload"
@@ -76,24 +63,24 @@ const Carousel: React.FC<Props> = ({ slides = [] }) => {
 
       <button
         onClick={prevSlide}
-        className="hidden size-10 text-xl group-hover:flex justify-center items-center absolute top-1/2 -translate-y-1/2 left-5 text-white bg-black/30 hover:bg-black/50 p-2 rounded-full"
+        className="flex size-8 xs:size-10 text-lg xs:text-xl justify-center items-center absolute top-1/2 -translate-y-1/2 left-2 xs:left-5 text-white bg-black/30 hover:bg-black/50 p-2 rounded-full md:hidden md:group-hover:flex"
       >
         &#10094;
       </button>
 
       <button
         onClick={nextSlide}
-        className="hidden size-10 text-xl group-hover:flex justify-center items-center absolute top-1/2 -translate-y-1/2 right-5 text-white bg-black/30 hover:bg-black/50 p-2 rounded-full"
+        className="flex size-8 xs:size-10 text-lg xs:text-xl justify-center items-center absolute top-1/2 -translate-y-1/2 right-2 xs:right-5 text-white bg-black/30 hover:bg-black/50 p-2 rounded-full md:hidden md:group-hover:flex"
       >
         &#10095;
       </button>
 
-      <div className="absolute flex justify-center py-2 z-100 bottom-0 w-full lg:gap-3 md:gap-2 gap-1">
+      <div className="absolute flex justify-center py-2 z-10 bottom-0 w-full lg:gap-3 md:gap-2 gap-1">
         {slides.map((_, index) => (
           <div
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`cursor-pointer lg:text-5xl md:text-5xl text-3xl ${
+            className={`cursor-pointer text-2xl xs:text-3xl md:text-4xl lg:text-5xl ${
               index === currentIndex ? "text-blue-500" : "text-gray-400"
             }`}
           >

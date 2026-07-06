@@ -9,13 +9,13 @@ import Image from "next/image";
 const RecentNewsSection: React.FC = () => {
   return (
     <section>
-      <div className="flex flex-col items-center py-2">
+      <div className="mx-auto flex w-full max-w-5xl flex-col items-center py-2 md:max-w-6xl lg:max-w-7xl 3xl:max-w-[90rem]">
         <Heading4 className="text-primary-600">
           {RecentNewsContents.title}
         </Heading4>
-        <ul className="mt-4 flex w-full gap-6 px-5">
+        <ul className="mt-4 grid w-full grid-cols-1 gap-6 px-5 sm:grid-cols-2 lg:grid-cols-3">
           {RecentNewsContents.articles.map((article, index) => (
-            <li key={index} className="flex-1">
+            <li key={index}>
               <div
                 className="
           group
@@ -31,12 +31,13 @@ const RecentNewsSection: React.FC = () => {
         "
               >
                 {/* Image */}
-                <div className="overflow-hidden">
+                <div className="relative aspect-video w-full overflow-hidden">
                   <Image
                     src={article.img}
                     alt={article.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="
-              w-full
               object-cover
               transition-transform
               duration-500
