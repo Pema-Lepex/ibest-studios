@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Open_Sans, Raleway } from "next/font/google";
 import "./globals.css";
+import ScrollToTop from "@/components/common/ScrollToTop";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -51,7 +52,10 @@ export default function RootLayout({
       lang="en"
       className={`${openSans.variable} ${raleway.variable} antialiased`}
     >
-      <body className="min-h-screen bg-ink-950 text-cream">{children}</body>
+      <body className="min-h-screen bg-ink-950 text-cream">
+        {children}
+        <ScrollToTop />
+      </body>
     </html>
   );
 }
