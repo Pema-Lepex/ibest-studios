@@ -156,7 +156,24 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-16 flex flex-col items-center justify-between gap-6 border-t border-cream/10 pt-8 sm:flex-row">
           <p className="text-center text-xs text-faint sm:text-left">
-            © {year} iBEST Studios. All rights reserved.
+            © {year} iBEST Studios. All rights reserved. Developed by{" "}
+            <Link
+              href="https://ibeststudios.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-mist transition-colors hover:text-gold-500"
+            >
+              iBEST STUDIOS
+            </Link>{" "}
+            &{" "}
+            <Link
+              href="https://ibesttechnologies.bt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-mist transition-colors hover:text-gold-500"
+            >
+              TECHNOLOGIES
+            </Link>
           </p>
 
           <div className="flex items-center gap-6">
