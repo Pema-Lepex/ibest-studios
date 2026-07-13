@@ -1,3 +1,18 @@
+import {
+  WorkNgeGiCharoGangzi,
+  WorkSamphel3,
+  WorkDragonTales,
+  WorkPeldenDrukpa,
+  WorkQrCode,
+  WorkELearningVideo,
+  WorkBhutanTalks,
+  WorkDziMitoGu,
+  WorkNewNormal,
+  WorkPemiTshewangTashi,
+  WorkWaterIsHappiness,
+  WorkAchoKhegpa,
+} from "@/assets";
+
 export const ExperienceIntro = {
   title: "Our Experiences",
   eyebrow: "We Are What We Mean",
@@ -9,79 +24,85 @@ export const ExperienceIntro = {
   videoTitle: "Brief Work Profile of the iBEST Studios",
 };
 
+/**
+ * Thumbnails are bundled locally rather than hot-linked from the old
+ * ibeststudios.com host, which is slow enough to time out the image optimizer
+ * on a cold request. Bundling also means the portfolio survives that host
+ * going away.
+ */
 export const OurWorks = {
   title: "Our Works",
   projects: [
     {
       category: "2D Animation",
       title: "Nge Gi Charo Gangzi",
-      image: "https://www.ibeststudios.com/image/1105208371.jpg",
+      image: WorkNgeGiCharoGangzi,
       link: "https://www.facebook.com/BHUTAN.WWF/videos/717237368871968",
     },
     {
       category: "3D Animation",
       title: "Samphel 3",
-      image: "https://www.ibeststudios.com/image/1290425821.jpg",
+      image: WorkSamphel3,
       link: "https://www.youtube.com/watch?v=F3SBREVedTE",
     },
     {
       category: "Animated Infographics",
       title: "Dragon Tales",
-      image: "https://www.ibeststudios.com/image/1300901372.jpg",
+      image: WorkDragonTales,
       link: "https://www.facebook.com/ibestedutainment/videos/718492435540030/",
     },
     {
       category: "MTV",
       title: "Pelden Drukpa",
-      image: "https://www.ibeststudios.com/image/135234692.jpg",
+      image: WorkPeldenDrukpa,
       link: "https://www.youtube.com/watch?v=Sc5KjCe5C_o",
     },
     {
       category: "Commercial Ads",
       title: "QR Code",
-      image: "https://www.ibeststudios.com/image/1795112580.jpg",
+      image: WorkQrCode,
       link: "https://www.facebook.com/rmabhutan/videos/242177550161583",
     },
     {
       category: "Video Tutorials",
       title: "e-Learning Video",
-      image: "https://www.ibeststudios.com/image/864785805.jpg",
+      image: WorkELearningVideo,
       link: "https://www.youtube.com/watch?v=ZTucWzjHEMc&list=PL8WWToQ5Kvkdei1BidYvJLXfXlbpDUagq&index=6",
     },
     {
       category: "Bhutan Talks",
       title: "First Episode",
-      image: "https://www.ibeststudios.com/image/548260823.jpg",
+      image: WorkBhutanTalks,
       link: "https://www.facebook.com/bhutantalks17/videos/382169003133194",
     },
     {
       category: "Visual Effects (VFX)",
       title: "Dzi Mito Gu",
-      image: "https://www.ibeststudios.com/image/782943113.jpg",
+      image: WorkDziMitoGu,
       link: "https://www.youtube.com/watch?v=H50NtEqgGsg&t=2s",
     },
     {
       category: "Live Action / Infographic",
       title: "New Normal | Our Gyenkhu",
-      image: "https://www.ibeststudios.com/image/105359407.jpg",
+      image: WorkNewNormal,
       link: "https://www.youtube.com/watch?v=9gxQAahIWJU&t=124s",
     },
     {
       category: "2D Animation",
       title: "Legend of Pemi Tshewang Tashi",
-      image: "https://www.ibeststudios.com/image/356938708.jpg",
+      image: WorkPemiTshewangTashi,
       link: "https://www.youtube.com/watch?v=x1Ac6dv8biE",
     },
     {
       category: "Documentary",
       title: "Water Is Happiness",
-      image: "https://www.ibeststudios.com/image/2145019650.jpg",
+      image: WorkWaterIsHappiness,
       link: "https://www.youtube.com/watch?v=OzOLxBItA6c&t=3s",
     },
     {
       category: "3D Animation",
       title: "Acho Khegpa",
-      image: "https://www.ibeststudios.com/image/1224888714.jpg",
+      image: WorkAchoKhegpa,
       link: "https://www.youtube.com/watch?v=kXF_O4g5o7s",
     },
   ],

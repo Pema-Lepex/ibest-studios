@@ -1,125 +1,156 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { Play } from "lucide-react";
 import {
   ExperienceIntro,
   OurWorks,
 } from "@/assets/content/Experience/Experience";
+import WorksGrid from "@/components/work/WorksGrid";
+import { Reveal, Counter } from "@/components/motion";
+import { PageHero, SectionHeading } from "@/components/ui";
 
-const PROJECTS_PER_PAGE = 10;
+const HIGHLIGHTS = [
+  { value: OurWorks.projects.length, suffix: "+", label: "Projects delivered" },
+  { value: 2, suffix: "", label: "Feature films" },
+  { value: 20, suffix: "+", label: "Creatives on set" },
+];
 
 const MainExperience: React.FC = () => {
-  const [page, setPage] = useState(1);
-  const pageCount = Math.ceil(OurWorks.projects.length / PROJECTS_PER_PAGE);
-  const visibleProjects = OurWorks.projects.slice(
-    (page - 1) * PROJECTS_PER_PAGE,
-    page * PROJECTS_PER_PAGE
-  );
+  // The reel loads as a poster frame first — an autoplaying iframe on every
+  // visit is both heavy and rude.
+  const [reelPlaying, setReelPlaying] = useState(false);
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-6 font-open-sans md:px-10 lg:max-w-6xl xl:max-w-7xl 3xl:max-w-[90rem]">
-      {/* Heading */}
-      <div className="py-12 text-center md:py-16">
-        <h1 className="font-raleway text-2xl uppercase tracking-wide text-gray-800 sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
-          {ExperienceIntro.title}
-        </h1>
-        <span className="mx-auto mt-3 block h-1 w-16 bg-accent-blue sm:w-24" />
-      </div>
+    <>
+      <PageHero
+        eyebrow={ExperienceIntro.eyebrow}
+        title="Four years of telling stories."
+        highlight={["stories."]}
+        subtitle={ExperienceIntro.paragraphs[0]}
+      />
 
-      {/* Intro + video */}
-      <section className="grid gap-10 pb-16 md:grid-cols-2 md:items-center lg:gap-16">
-        <div>
-          <h2 className="mb-4 font-raleway text-xl font-bold text-accent-blue sm:text-2xl lg:text-3xl xl:text-4xl">
-            {ExperienceIntro.eyebrow}
-          </h2>
-          <div className="space-y-4">
-            {ExperienceIntro.paragraphs.map((para, i) => (
-              <p key={i} className="leading-relaxed text-body-text lg:text-lg xl:text-xl">
-                {para}
-              </p>
-            ))}
-          </div>
-        </div>
-        <div className="overflow-hidden rounded-md shadow-sm">
-          <iframe
-            title={ExperienceIntro.videoTitle}
-            src={`https://www.youtube.com/embed/${ExperienceIntro.videoId}`}
-            className="aspect-video w-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-      </section>
+      {/* Showreel */}
+      <section
+        id="reel"
+        className="relative scroll-mt-28 border-b border-cream/5 bg-ink-900 py-20 sm:py-28"
+      >
+        <div className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12">
+          <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
+            {/* Copy */}
+            <div>
+              <Reveal>
+                <span className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-gold-500 sm:text-sm">
+                  <span className="h-px w-8 bg-gold-500/60" aria-hidden="true" />
+                  Showreel
+                </span>
+              </Reveal>
 
-      {/* Our works */}
-      <section className="py-12 md:py-16">
-        <div className="mb-8 text-center">
-          <h2 className="font-raleway text-xl uppercase tracking-wide text-gray-800 sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
-            {OurWorks.title}
-          </h2>
-          <span className="mx-auto mt-3 block h-1 w-12 bg-accent-blue sm:w-16" />
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4 xl:gap-8">
-          {visibleProjects.map((project, i) => (
-            <a
-              key={i}
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block overflow-hidden rounded-2xl border border-customOrange-100 bg-white shadow-sm transition-transform hover:-translate-y-1"
-            >
-              <img
-                src={project.image}
-                alt={project.title}
-                className="aspect-video w-full object-cover"
-              />
-              <div className="p-6 xl:p-7">
-                <p className="mb-2 font-raleway text-sm font-semibold text-accent-blue lg:text-base">
-                  {project.category}
-                </p>
-                <p className="font-semibold text-body-text lg:text-lg">{project.title}</p>
+              <Reveal delay={0.05}>
+                <h2 className="display mt-5 text-3xl text-cream sm:text-4xl 3xl:text-5xl">
+                  {ExperienceIntro.videoTitle}
+                </h2>
+              </Reveal>
+
+              <Reveal delay={0.12}>
+                <div className="mt-6 space-y-4">
+                  {ExperienceIntro.paragraphs.map((para, i) => (
+                    <p
+                      key={i}
+                      className="text-base leading-relaxed text-mist sm:text-lg"
+                    >
+                      {para}
+                    </p>
+                  ))}
+                </div>
+              </Reveal>
+
+              {/* Highlights */}
+              <Reveal delay={0.2}>
+                <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-cream/10 pt-8">
+                  {HIGHLIGHTS.map((item) => (
+                    <div key={item.label}>
+                      <dt className="sr-only">{item.label}</dt>
+                      <dd>
+                        <span className="display block text-3xl text-gradient-gold sm:text-4xl">
+                          <Counter to={item.value} suffix={item.suffix} />
+                        </span>
+                        <span className="mt-1.5 block text-[0.65rem] uppercase tracking-widest text-faint sm:text-xs">
+                          {item.label}
+                        </span>
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </Reveal>
+            </div>
+
+            {/* Player */}
+            <Reveal direction="left" delay={0.1}>
+              <div className="relative aspect-video overflow-hidden rounded-2xl border border-cream/10 bg-ink-950">
+                <AnimatePresence mode="wait">
+                  {reelPlaying ? (
+                    <motion.iframe
+                      key="player"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                      title={ExperienceIntro.videoTitle}
+                      src={`https://www.youtube.com/embed/${ExperienceIntro.videoId}?autoplay=1&rel=0`}
+                      className="absolute inset-0 h-full w-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  ) : (
+                    <motion.button
+                      key="poster"
+                      type="button"
+                      exit={{ opacity: 0 }}
+                      onClick={() => setReelPlaying(true)}
+                      aria-label="Play the iBEST Studios showreel"
+                      className="group absolute inset-0 h-full w-full"
+                    >
+                      {/* YouTube's own thumbnail — no extra asset to ship. */}
+                      <Image
+                        src={`https://img.youtube.com/vi/${ExperienceIntro.videoId}/maxresdefault.jpg`}
+                        alt=""
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 55vw"
+                        className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
+                      />
+                      <span className="absolute inset-0 bg-ink-950/50 transition-colors duration-500 group-hover:bg-ink-950/35" />
+
+                      <span className="absolute inset-0 flex items-center justify-center">
+                        <span className="relative flex h-20 w-20 items-center justify-center rounded-full bg-gold-500 text-ink-950 transition-transform duration-500 group-hover:scale-110">
+                          <span className="absolute inset-0 animate-pulse-ring rounded-full bg-gold-500" />
+                          <Play className="relative ml-1 h-7 w-7 fill-current" />
+                        </span>
+                      </span>
+                    </motion.button>
+                  )}
+                </AnimatePresence>
               </div>
-            </a>
-          ))}
-        </div>
-
-        {/* Pagination */}
-        {pageCount > 1 && (
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
-            <button
-              type="button"
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-              disabled={page === 1}
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-gray-200 text-accent-blue disabled:opacity-40 lg:h-11 lg:w-11 lg:text-lg"
-            >
-              «
-            </button>
-            {Array.from({ length: pageCount }, (_, i) => i + 1).map((num) => (
-              <button
-                key={num}
-                type="button"
-                onClick={() => setPage(num)}
-                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-md border text-sm font-medium lg:h-11 lg:w-11 lg:text-base ${
-                  num === page
-                    ? "border-accent-blue bg-accent-blue text-white"
-                    : "border-gray-200 text-accent-blue"
-                }`}
-              >
-                {num}
-              </button>
-            ))}
-            <button
-              type="button"
-              onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
-              disabled={page === pageCount}
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-gray-200 text-accent-blue disabled:opacity-40 lg:h-11 lg:w-11 lg:text-lg"
-            >
-              »
-            </button>
+            </Reveal>
           </div>
-        )}
+        </div>
       </section>
-    </div>
+
+      {/* Works */}
+      <section className="relative bg-ink-950 py-24 sm:py-32">
+        <div className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12">
+          <SectionHeading
+            eyebrow="Portfolio"
+            title={OurWorks.title}
+            highlight={["Works"]}
+            subtitle="Filter by discipline. Every card opens the finished piece."
+          />
+
+          <WorksGrid filterable />
+        </div>
+      </section>
+    </>
   );
 };
 

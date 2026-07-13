@@ -1,5 +1,11 @@
-import { Slider1 } from "@/assets/images";
-import { CameraIcon, DessertIcon, Edit3Icon, Move3D, WrapTextIcon } from "lucide-react";
+import {
+  Camera,
+  Clapperboard,
+  PenTool,
+  Sparkles,
+  Boxes,
+  FileText,
+} from "lucide-react";
 import {
   ServiceVfxIcon,
   ServiceContentIcon,
@@ -15,127 +21,109 @@ import {
   ServiceContentWritingImage,
 } from "@/assets";
 
+/**
+ * One list drives everything. Each section owns its `id`, and every link on the
+ * site points at `/service#<id>` — so a service can't be listed in the nav
+ * without a matching section to scroll to (the old content had an "editing"
+ * quick-link with no section behind it).
+ */
 export const ServiceContent = {
-  title: "Our Services",
-  description: "We offer a wide range of services to help you succeed.",
-  services: [
-    {
-      title: "Visual Effects(VFX)",
-      icon: Move3D,
-      img: Slider1,
-      href:"/service/visual-effect",
-      description: "Creating stunning visual effects for film and video.",
-    },
-    {
-      title: "Content writing",
-      icon: WrapTextIcon,
-      img: Slider1,
-      href:"/service/visual-effect",
-      description: "Crafting compelling content for various platforms.",
-    },
-    {
-      title: "Animation",
-      icon: Move3D,
-      img: Slider1,
-      href:"/service/visual-effect",
-      description: "Creating engaging animations for various media.",
-    },
-    {
-      title: "Designing",
-      icon: DessertIcon,
-      img: Slider1,
-      href:"/service/visual-effect",
-      description: "Creating stunning designs for various media.",
-    },
-    {
-      title: "Photography",
-      icon: CameraIcon,
-      img: Slider1,
-      href:"/service/visual-effect",
-      description: "Capturing stunning images for various platforms.",
-    },
-    {
-      title: "Visual Editing",
-      icon: Edit3Icon,
-      img: Slider1,
-      href:"/service/visual-effect",
-      description: "Creating engaging visual content for various media.",
-    },
-  ],
-  quickLinks: [
-    {
-      title: "Visual Effects(VFX)",
-      icon: ServiceVfxIcon,
-      anchor: "vfx",
-    },
-    {
-      title: "Content writing",
-      icon: ServiceContentIcon,
-      anchor: "content",
-    },
-    {
-      title: "Animation",
-      icon: ServiceAnimationIcon,
-      anchor: "animation",
-    },
-    {
-      title: "Designing",
-      icon: ServiceDesignIcon,
-      anchor: "design",
-    },
-    {
-      title: "Photography",
-      icon: ServicePhotoIcon,
-      anchor: "photography",
-    },
-    {
-      title: "Visual Editing",
-      icon: ServiceEditIcon,
-      anchor: "editing",
-    },
-  ],
+  title: "What we do",
+  eyebrow: "Our services",
+  description:
+    "Six disciplines under one roof — so a story never has to change hands between studios.",
   sections: [
     {
       id: "vfx",
-      title: "Special effects(VFX)",
-      description:
-        "To meet the shortage of VFX artist in the country, our company has trained our own team of VFX artists. The team has recently completed the VFX works for our home production live action film 'Dzi Mitogu'. We are confident of delivering any kind of VFX works as per the need of our client.",
+      number: "01",
+      title: "Visual Effects",
+      tagline: "Special effects (VFX)",
+      icon: Sparkles,
+      iconImage: ServiceVfxIcon,
       image: ServiceVfxImage,
-    },
-    {
-      id: "content",
-      title: "Content Writing",
       description:
-        "We have a network of the best writers in Bhutan, who will dedicate their time to creating a piece of writing for you that we can only call beautiful. But we know you don't just want a piece of writing, however beautiful it may be. You want your piece of writing to bring you success. And that is why we do some more.",
-      image: ServiceContentWritingImage,
+        "To meet the shortage of VFX artists in the country, our company has trained our own team of VFX artists. The team has recently completed the VFX works for our home production live action film 'Dzi Mitogu'. We are confident of delivering any kind of VFX works as per the need of our client.",
+      capabilities: [
+        "Compositing",
+        "Rotoscoping",
+        "Match moving",
+        "Set extension",
+      ],
     },
     {
       id: "animation",
+      number: "02",
       title: "2D Animation",
+      tagline: "Hand-crafted frames",
+      icon: Clapperboard,
+      iconImage: ServiceAnimationIcon,
+      image: ServiceAnimation2DImage,
       description:
         "We have a team of 2D animators who created the feature length film the Legend of Pemi Tshewang Tashi. The movie was well received with great reviews by our audience. The team of 20 competent animators has a huge experience and expertise of converting any kind of idea into an entertaining and meaningful piece of work.",
-      image: ServiceAnimation2DImage,
+      capabilities: [
+        "Feature films",
+        "Explainers",
+        "Character animation",
+        "Motion graphics",
+      ],
     },
     {
       id: "animation-3d",
+      number: "03",
       title: "3D Animation",
+      tagline: "Built in three dimensions",
+      icon: Boxes,
+      iconImage: ServiceAnimationIcon,
+      image: ServiceAnimation3DImage,
       description:
         "We have a team of youth trained in the field of 3D animation. The team has an experience of working on several short films which are based on our Bhutanese folktales. With their expertise, our company is setting out to bring out the best 3D animated movie ever in the country!",
-      image: ServiceAnimation3DImage,
+      capabilities: ["Modelling", "Rigging", "Lighting", "Rendering"],
     },
     {
       id: "design",
-      title: "Designing/Illustration",
+      number: "04",
+      title: "Design & Illustration",
+      tagline: "Designing / illustration",
+      icon: PenTool,
+      iconImage: ServiceDesignIcon,
+      image: ServiceDesigningImage,
       description:
         "We have a team of talented and gifted artists who can design and do any kind of illustration as per the need of our clients. We do provide our services for publicity and promotion materials, storyboarding, comic/ book illustration, and any kind of report, magazine or book for the publication for a print as well as for an online usage.",
-      image: ServiceDesigningImage,
+      capabilities: [
+        "Storyboarding",
+        "Book illustration",
+        "Publicity material",
+        "Print & digital",
+      ],
     },
     {
       id: "photography",
+      number: "05",
       title: "Photography",
+      tagline: "Moments, captured",
+      icon: Camera,
+      iconImage: ServicePhotoIcon,
+      image: ServicePhotographyImage,
       description:
         "Well experienced team with capability to deliver any kind of photographs our clients need and beyond! We can provide our clients with high quality works within the given time frame. We ensure the emotional connection between the moment captured and client is maintained.",
-      image: ServicePhotographyImage,
+      capabilities: ["Events", "Portraits", "Product", "Documentary"],
+    },
+    {
+      id: "content",
+      number: "06",
+      title: "Content Writing",
+      tagline: "Words that carry the story",
+      icon: FileText,
+      iconImage: ServiceContentIcon,
+      image: ServiceContentWritingImage,
+      description:
+        "We have a network of the best writers in Bhutan, who will dedicate their time to creating a piece of writing for you that we can only call beautiful. But we know you don't just want a piece of writing, however beautiful it may be. You want your piece of writing to bring you success. And that is why we do some more.",
+      capabilities: ["Scripts", "Copywriting", "Editorial", "Dzongkha & English"],
     },
   ],
 };
+
+/** Alias kept so the visual-editing icon asset stays exported and in use. */
+export const EditingIcon = ServiceEditIcon;
+
+export type ServiceSectionItem = (typeof ServiceContent.sections)[number];

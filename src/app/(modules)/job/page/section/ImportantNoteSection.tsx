@@ -1,64 +1,111 @@
-
 "use client";
-import { JobIntro, CandidateNotes, HowToApply } from "@/assets/content/Career/Skills";
-import { CommonParagraph4 } from "@/components";
+
 import Link from "next/link";
+import { AlertCircle, ArrowUpRight, Mail } from "lucide-react";
+import {
+  CandidateNotes,
+  HowToApply,
+} from "@/assets/content/Career/Skills";
+import { Reveal } from "@/components/motion";
+import { Button } from "@/components/ui";
 
 const ImportantNoteSection = () => {
+  const notes = [
+    CandidateNotes.noteBefore,
+    null, // the email note is a link, so it's rendered separately below
+    CandidateNotes.noteAfter,
+  ];
+
   return (
-     <section className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 sm:py-12 md:py-16 lg:max-w-5xl lg:px-8 lg:py-20 xl:max-w-6xl xl:py-24 3xl:max-w-7xl">
+    <section className="border-t border-cream/5 bg-ink-900 py-20 sm:py-28">
+      <div className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          {/* Notes */}
+          <Reveal>
+            <div className="rounded-2xl border border-cream/10 bg-ink-850 p-7 sm:p-9">
+              <h2 className="flex items-center gap-3 font-raleway text-lg font-bold uppercase tracking-wide text-cream sm:text-xl">
+                <AlertCircle className="h-5 w-5 shrink-0 text-gold-500" />
+                {CandidateNotes.title}
+              </h2>
 
-        {/* Important notes for candidates */}
-        <section className="mt-10 sm:mt-12 lg:mt-14">
-          <h2 className="text-base font-bold text-primary-600 sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
-            {CandidateNotes.title}
-          </h2>
-          <hr className="mt-3 mb-4 border-gray-200 sm:mb-5 lg:mb-6" />
+              <p className="mt-5 text-sm text-mist sm:text-base">
+                {CandidateNotes.intro}
+              </p>
 
-          <CommonParagraph4 className="mb-4 text-gray-800">
-            {CandidateNotes.intro}
-          </CommonParagraph4>
+              <ul className="mt-6 space-y-4">
+                {notes[0] && <Note>{notes[0]}</Note>}
 
-          <ul className="list-disc space-y-2.5 pl-5 marker:text-customOrange-200 sm:space-y-3 lg:space-y-4">
-            <li>
-              <CommonParagraph4 className="text-gray-800">
-                {CandidateNotes.noteBefore}
-              </CommonParagraph4>
-            </li>
-            <li>
-              <CommonParagraph4 className="text-gray-800">
-                You must submit a CV and a sample of your works to {" "}
-                <Link
-                  href={CandidateNotes.emailHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-accent-blue underline underline-offset-4 hover:opacity-70 break-words"
+                <Note>
+                  You must submit a CV and a sample of your works to{" "}
+                  <Link
+                    href={CandidateNotes.emailHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="break-all font-semibold text-gold-500 underline decoration-gold-500/40 underline-offset-4 transition-colors hover:text-gold-400"
+                  >
+                    {CandidateNotes.email}
+                  </Link>
+                </Note>
+
+                {notes[2] && <Note>{notes[2]}</Note>}
+              </ul>
+            </div>
+          </Reveal>
+
+          {/* Apply */}
+          <Reveal direction="left" delay={0.1}>
+            <div className="relative flex h-full flex-col justify-center overflow-hidden rounded-2xl border border-gold-500/25 bg-ink-850 p-7 sm:p-10">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-gold-500/10 blur-3xl"
+              />
+
+              <h2 className="display relative text-3xl text-cream sm:text-4xl">
+                {HowToApply.title}
+              </h2>
+
+              <p className="relative mt-5 text-sm leading-relaxed text-mist sm:text-base">
+                {HowToApply.subTitle}
+              </p>
+
+              <div className="relative mt-9 flex flex-col gap-3 sm:flex-row">
+                <Button
+                  href={HowToApply.link}
+                  external
+                  size="lg"
+                  magnetic
+                  icon={<ArrowUpRight className="h-5 w-5" />}
                 >
-                   {CandidateNotes.email}
-                </Link>
-              </CommonParagraph4>
-            </li>
-            <li>
-              <CommonParagraph4 className="text-gray-800">
-                {CandidateNotes.noteAfter}
-              </CommonParagraph4>
-            </li>
-          </ul>
-        </section>
-
-        {/* Apply button - small, left aligned */}
-        <div className="mt-8 sm:mt-10 lg:mt-12">
-          <Link
-            href={HowToApply.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center rounded-md bg-customOrange-200 px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-customOrange-100 sm:px-5 sm:text-sm lg:px-6 lg:py-3 lg:text-base"
-          >
-            Apply Here
-          </Link>
+                  Apply now
+                </Button>
+                <Button
+                  href={CandidateNotes.emailHref}
+                  external
+                  variant="outline"
+                  size="lg"
+                  icon={<Mail className="h-4 w-4" />}
+                >
+                  Email us
+                </Button>
+              </div>
+            </div>
+          </Reveal>
         </div>
-      </section>
+      </div>
+    </section>
   );
 };
+
+function Note({ children }: { children: React.ReactNode }) {
+  return (
+    <li className="flex gap-3 text-sm leading-relaxed text-mist sm:text-base">
+      <span
+        aria-hidden="true"
+        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ember-500"
+      />
+      <span>{children}</span>
+    </li>
+  );
+}
 
 export default ImportantNoteSection;

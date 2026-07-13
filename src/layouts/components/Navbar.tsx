@@ -2,30 +2,34 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { StudiosLogo } from "@/assets";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
+import { StudiosLogo } from "@/assets";
+import { Button } from "@/components/ui";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "Service", href: "/service" },
-  { label: "Experience", href: "/experience" },
+  { label: "Services", href: "/service" },
+  { label: "Work", href: "/experience" },
   { label: "Team", href: "/team" },
-  { label: "Job", href: "/job" },
+  { label: "Careers", href: "/job" },
   { label: "Download", href: "/download" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when the mobile menu is open
+  // The overlay covers the page, so the page behind it must not scroll.
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
     return () => {
@@ -33,104 +37,181 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
+  // A route change while the menu is open should close it.
+  useEffect(() => setIsOpen(false), [pathname]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setIsOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
   return (
-    <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
-          ? "bg-white/70 backdrop-blur-md shadow-sm border-b border-slate-200"
-          : "bg-white border-b border-transparent"
-      }`}
-    >
-      <nav className="mx-auto flex 5xl:max-w-[3200px] items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-lg font-semibold tracking-tight text-slate-900"
-          onClick={() => setIsOpen(false)}
-        >
-          <Image src={StudiosLogo} alt="iBEST Studios" width={60} height={60} />
-  
-        </Link>
-
-        {/* Desktop links */}
-        <ul className="hidden items-center gap-8 md:flex">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-sm font-medium text-slate-600 transition-colors hover:text-primary-600"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        {/* Desktop CTA buttons */}
-        <div className="hidden items-center gap-3 md:flex">
-          <Link
-            href="/contact"
-            className="rounded-full bg-primary-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary-700"
-          >
-            Contact
-          </Link>
-        </div>
-
-        {/* Mobile menu button */}
-        <button
-          type="button"
-          onClick={() => setIsOpen((prev) => !prev)}
-          aria-label={isOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isOpen}
-          className="relative flex h-9 w-9 items-center justify-center rounded-md text-slate-700 md:hidden"
-        >
-          <span
-            className={`absolute h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
-              isOpen ? "rotate-45" : "-translate-y-1.5"
-            }`}
-          />
-          <span
-            className={`absolute h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
-              isOpen ? "opacity-0" : "opacity-100"
-            }`}
-          />
-          <span
-            className={`absolute h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
-              isOpen ? "-rotate-45" : "translate-y-1.5"
-            }`}
-          />
-        </button>
-      </nav>
-
-      {/* Mobile menu panel */}
-      <div
-        className={`overflow-hidden transition-[max-height] duration-300 ease-in-out md:hidden ${
-          isOpen ? "max-h-96" : "max-h-0"
+    <>
+      <motion.header
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+          scrolled || isOpen
+            ? "border-b border-cream/10 bg-ink-950/80 backdrop-blur-xl"
+            : "border-b border-transparent bg-transparent"
         }`}
       >
-        <ul className="flex flex-col gap-1 border-t border-slate-200 bg-white px-4 pb-4 pt-2">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="block rounded-md px-3 py-2.5 text-base font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-primary-600"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-          <li className="mt-2 flex flex-col gap-2 border-t border-slate-100 pt-3">
-            <Link
-              href="/contact"
-              onClick={() => setIsOpen(false)}
-              className="rounded-full bg-primary-600 px-5 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary-700"
+        <nav className="mx-auto flex max-w-[1600px] items-center justify-between px-5 py-4 sm:px-8 lg:px-12">
+          <Link
+            href="/"
+            className="group relative z-10 flex items-center gap-3"
+            aria-label="iBEST Studios — home"
+          >
+            <Image
+              src={StudiosLogo}
+              alt=""
+              width={48}
+              height={48}
+              priority
+              className="h-10 w-10 transition-transform duration-500 group-hover:rotate-10 sm:h-12 sm:w-12"
+            />
+            <span className="font-raleway text-base font-extrabold uppercase tracking-[0.15em] text-cream sm:text-lg">
+              iBEST<span className="text-gold-500">.</span>
+            </span>
+          </Link>
+
+          {/* Desktop links */}
+          <ul className="hidden items-center gap-1 lg:flex">
+            {NAV_LINKS.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300 ${
+                    isActive(link.href)
+                      ? "text-cream"
+                      : "text-mist hover:text-cream"
+                  }`}
+                >
+                  {isActive(link.href) && (
+                    // layoutId lets the pill glide between links on navigation
+                    // instead of popping out of one and into the next.
+                    <motion.span
+                      layoutId="nav-active-pill"
+                      className="absolute inset-0 rounded-full bg-cream/10"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{link.label}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <div className="flex items-center gap-3">
+            <div className="hidden lg:block">
+              <Button href="/contact" size="sm" magnetic>
+                Start a project
+              </Button>
+            </div>
+
+            {/* Burger */}
+            <button
+              type="button"
+              onClick={() => setIsOpen((v) => !v)}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
+              className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-cream/15 text-cream transition-colors hover:border-gold-500/60 hover:text-gold-500 lg:hidden"
             >
-              Contact
-            </Link>
-          </li>
-        </ul>
-      </div>
-    </header>
+              <span className="relative block h-3.5 w-5">
+                <motion.span
+                  animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute left-0 top-0 h-0.5 w-5 rounded-full bg-current"
+                />
+                <motion.span
+                  animate={isOpen ? { opacity: 0, x: 8 } : { opacity: 1, x: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="absolute left-0 top-1.5 h-0.5 w-5 rounded-full bg-current"
+                />
+                <motion.span
+                  animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute left-0 top-3 h-0.5 w-5 rounded-full bg-current"
+                />
+              </span>
+            </button>
+          </div>
+        </nav>
+      </motion.header>
+
+      {/* Full-screen mobile overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ clipPath: "inset(0 0 100% 0)" }}
+            animate={{ clipPath: "inset(0 0 0% 0)" }}
+            exit={{ clipPath: "inset(0 0 100% 0)" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-40 flex flex-col justify-center overflow-y-auto bg-ink-950 px-6 py-24 lg:hidden"
+          >
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-24 top-1/4 h-72 w-72 rounded-full bg-gold-500/10 blur-3xl"
+            />
+
+            <ul className="relative space-y-1">
+              {NAV_LINKS.map((link, i) => (
+                <motion.li
+                  key={link.href}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    delay: 0.2 + i * 0.06,
+                    duration: 0.6,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                >
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="group flex items-baseline gap-4 py-1.5"
+                  >
+                    <span className="w-6 font-mono text-xs text-faint">
+                      0{i + 1}
+                    </span>
+                    <span
+                      className={`display text-4xl transition-colors duration-300 xs:text-5xl ${
+                        isActive(link.href)
+                          ? "text-gold-500"
+                          : "text-cream group-hover:text-gold-500"
+                      }`}
+                    >
+                      {link.label}
+                    </span>
+                  </Link>
+                </motion.li>
+              ))}
+            </ul>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="relative mt-10 border-t border-cream/10 pt-8"
+            >
+              <Button href="/contact" size="lg" className="w-full">
+                Start a project
+              </Button>
+              <a
+                href="mailto:infoibeststudios@gmail.com"
+                className="mt-6 block break-all text-sm text-mist transition-colors hover:text-gold-500"
+              >
+                infoibeststudios@gmail.com
+              </a>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

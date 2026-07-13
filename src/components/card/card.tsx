@@ -26,9 +26,9 @@ export const Card: React.FC<CardProps> = ({
         transition-all
         duration-300
         hover:-translate-y-2
-        hover:border-primary-500/40
+        hover:border-gold-500/40
         hover:shadow-2xl
-        hover:shadow-primary-500/10
+        hover:shadow-gold-500/10
         ${className}
       `}
     >
@@ -41,10 +41,10 @@ export const Card: React.FC<CardProps> = ({
           transition-opacity
           duration-300
           group-hover:opacity-100
-          bg-gradient-to-br
-          from-primary-500/10
+          bg-linear-to-br
+          from-gold-500/10
           via-transparent
-          to-primary-700/10
+          to-ember-500/10
           pointer-events-none
         "
       />

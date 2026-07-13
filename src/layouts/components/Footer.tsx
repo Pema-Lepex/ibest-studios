@@ -1,140 +1,177 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { StudiosLogo } from "@/assets";
+import { Reveal, Marquee } from "@/components/motion";
+import { Button } from "@/components/ui";
+import { ArrowUpRight, Mail, MapPin } from "lucide-react";
 
-const FOOTER_LINKS = [
+const SITEMAP = [
   {
-    heading: "Product",
+    heading: "Studio",
     links: [
-      { label: "Features", href: "/features" },
-      { label: "Pricing", href: "/pricing" },
-      { label: "Changelog", href: "/changelog" },
-      { label: "Roadmap", href: "/roadmap" },
+      { label: "Home", href: "/" },
+      { label: "Our story", href: "/#story" },
+      { label: "Team", href: "/team" },
+      { label: "Careers", href: "/job" },
     ],
   },
   {
-    heading: "Company",
+    heading: "Services",
     links: [
-      { label: "About", href: "/about" },
-      { label: "Blog", href: "/blog" },
-      { label: "Careers", href: "/careers" },
+      { label: "Visual effects", href: "/service#vfx" },
+      { label: "2D & 3D animation", href: "/service#animation" },
+      { label: "Design & illustration", href: "/service#design" },
+      { label: "Content writing", href: "/service#content" },
+    ],
+  },
+  {
+    heading: "Explore",
+    links: [
+      { label: "Our work", href: "/experience" },
+      { label: "Download app", href: "/download" },
       { label: "Contact", href: "/contact" },
-    ],
-  },
-  {
-    heading: "Resources",
-    links: [
-      { label: "Documentation", href: "/docs" },
-      { label: "Guides", href: "/guides" },
-      { label: "Support", href: "/support" },
-      { label: "API status", href: "/status" },
-    ],
-  },
-  {
-    heading: "Legal",
-    links: [
-      { label: "Privacy policy", href: "/privacy" },
-      { label: "Terms of service", href: "/terms" },
-      { label: "Cookie policy", href: "/cookies" },
     ],
   },
 ];
 
-const SOCIAL_LINKS = [
-  {
-    label: "X",
-    href: "https://x.com",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4.5 w-4.5">
-        <path d="M18.9 2H22l-7.6 8.7L23.5 22h-7.3l-5.7-7.5L4 22H1l8.2-9.3L1 2h7.5l5.1 6.8L18.9 2Zm-1.3 18h2L7 3.9H4.9L17.6 20Z" />
-      </svg>
-    ),
-  },
-  {
-    label: "GitHub",
-    href: "https://github.com",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4.5 w-4.5">
-        <path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.5 2.87 8.3 6.84 9.64.5.1.68-.22.68-.5 0-.24-.01-1.03-.01-1.87-2.78.62-3.37-1.2-3.37-1.2-.46-1.2-1.11-1.53-1.11-1.53-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.93-2.35 4.79-4.58 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.5A10.02 10.02 0 0 0 22 12.2C22 6.58 17.52 2 12 2Z" />
-      </svg>
-    ),
-  },
-  {
-    label: "LinkedIn",
-    href: "https://linkedin.com",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4.5 w-4.5">
-        <path d="M6.94 8.5H3.56V20.5H6.94V8.5ZM5.25 3.5A1.96 1.96 0 1 0 5.28 7.42 1.96 1.96 0 0 0 5.25 3.5ZM20.5 20.5H17.13V14.6c0-1.41-.03-3.22-1.96-3.22-1.97 0-2.27 1.54-2.27 3.12v6h-3.37V8.5h3.24v1.64h.05c.45-.85 1.56-1.75 3.21-1.75 3.43 0 4.07 2.26 4.07 5.19v6.92Z" />
-      </svg>
-    ),
-  },
+const SOCIALS = [
+  { label: "Facebook", href: "https://www.facebook.com/ibestedutainment" },
+  { label: "YouTube", href: "https://www.youtube.com/@ibeststudios" },
 ];
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-slate-200 bg-white">
-      <div className="mx-auto 5xl:max-w-[3200px] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-6">
-          {/* Brand column */}
-          <div className="col-span-2 md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 text-lg font-semibold tracking-tight text-slate-900">
-               <Image src={StudiosLogo} alt="iBEST Studios" width={50} height={50} />
-              iBEST Studios
+    <footer className="relative overflow-hidden border-t border-cream/10 bg-ink-900">
+      {/* Warm bloom behind the CTA, so the footer doesn't read as a dead zone. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-40 left-1/2 h-80 w-152 -translate-x-1/2 rounded-full bg-gold-500/10 blur-[100px]"
+      />
+
+      {/* Closing CTA */}
+      <section className="relative mx-auto max-w-[1600px] px-5 pb-16 pt-20 text-center sm:px-8 sm:pt-24 lg:px-12">
+        <Reveal>
+          <p className="mb-6 text-xs font-semibold uppercase tracking-[0.25em] text-gold-500 sm:text-sm">
+            Have a story to tell?
+          </p>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <h2 className="display mx-auto max-w-4xl text-4xl text-cream sm:text-6xl lg:text-7xl">
+            Let&apos;s bring it{" "}
+            <span className="text-gradient-gold">to life.</span>
+          </h2>
+        </Reveal>
+        <Reveal delay={0.2}>
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Button
+              href="/contact"
+              size="lg"
+              magnetic
+              icon={<ArrowUpRight className="h-5 w-5" />}
+            >
+              Start a project
+            </Button>
+            <Button href="/experience" variant="outline" size="lg">
+              See our work
+            </Button>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Scrolling capability strip */}
+      <div className="relative border-y border-cream/10 py-6">
+        <Marquee speed={45}>
+          {["Animation", "VFX", "Illustration", "Film", "Design", "Sound", "Storytelling"].map(
+            (word) => (
+              <span
+                key={word}
+                className="display flex items-center gap-8 px-8 text-2xl uppercase text-cream/15 sm:text-4xl"
+              >
+                {word}
+                <span className="text-gold-500/40">✦</span>
+              </span>
+            ),
+          )}
+        </Marquee>
+      </div>
+
+      {/* Sitemap */}
+      <div className="relative mx-auto max-w-[1600px] px-5 py-16 sm:px-8 lg:px-12">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
+          {/* Brand */}
+          <div className="lg:col-span-2">
+            <Link href="/" className="flex items-center gap-3">
+              <Image src={StudiosLogo} alt="" width={44} height={44} className="h-11 w-11" />
+              <span className="font-raleway text-lg font-extrabold uppercase tracking-[0.15em] text-cream">
+                iBEST<span className="text-gold-500">.</span>
+              </span>
             </Link>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-500">
-              Tools for teams who ship fast. Build, launch, and grow your product without the busywork.
+
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-mist">
+              A multimedia production studio in Bhutan built on creative
+              storytelling — animation, VFX, design, and live-action film.
             </p>
-            <div className="mt-6 flex items-center gap-3">
-              {SOCIAL_LINKS.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={social.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition-colors hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-600"
-                >
-                  {social.icon}
-                </a>
-              ))}
+
+            <div className="mt-6 space-y-3 text-sm">
+              <a
+                href="mailto:infoibeststudios@gmail.com"
+                className="flex items-center gap-3 text-mist transition-colors hover:text-gold-500"
+              >
+                <Mail className="h-4 w-4 shrink-0 text-gold-500" />
+                <span className="break-all">infoibeststudios@gmail.com</span>
+              </a>
+              <p className="flex items-center gap-3 text-mist">
+                <MapPin className="h-4 w-4 shrink-0 text-gold-500" />
+                Thimphu, Bhutan
+              </p>
             </div>
           </div>
 
           {/* Link columns */}
-          {FOOTER_LINKS.map((section) => (
-            <div key={section.heading} className="col-span-1 md:col-span-1">
-              <h3 className="text-sm font-semibold text-slate-900">{section.heading}</h3>
-              <ul className="mt-4 space-y-3">
+          {SITEMAP.map((section) => (
+            <nav key={section.heading} aria-label={section.heading}>
+              <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-cream">
+                {section.heading}
+              </h3>
+              <ul className="mt-5 space-y-3">
                 {section.links.map((link) => (
-                  <li key={link.href}>
+                  <li key={link.href + link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-slate-500 transition-colors hover:text-indigo-600"
+                      className="link-underline text-sm text-mist transition-colors hover:text-gold-500"
                     >
                       {link.label}
                     </Link>
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
           ))}
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-100 pt-8 sm:flex-row">
-          <p className="text-sm text-slate-500">© {year} iBEST Studios. All rights reserved.</p>
+        <div className="mt-16 flex flex-col items-center justify-between gap-6 border-t border-cream/10 pt-8 sm:flex-row">
+          <p className="text-center text-xs text-faint sm:text-left">
+            © {year} iBEST Studios. All rights reserved.
+          </p>
+
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="text-sm text-slate-500 transition-colors hover:text-indigo-600">
-              Privacy
-            </Link>
-            <Link href="/terms" className="text-sm text-slate-500 transition-colors hover:text-indigo-600">
-              Terms
-            </Link>
-            <Link href="/sitemap" className="text-sm text-slate-500 transition-colors hover:text-indigo-600">
-              Sitemap
-            </Link>
+            {SOCIALS.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-1 text-xs uppercase tracking-widest text-mist transition-colors hover:text-gold-500"
+              >
+                {social.label}
+                <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+            ))}
           </div>
         </div>
       </div>

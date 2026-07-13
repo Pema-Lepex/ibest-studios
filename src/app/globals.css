@@ -1,80 +1,258 @@
 @import "tailwindcss";
-@source "../../node_modules/react-tailwindcss-datepicker/dist/index.esm.js";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* =========================================================================
+   iBEST STUDIOS — dark cinematic design system
+
+   The canvas is ink (near-black) so artwork and reels carry the page.
+   Gold is the single hero accent; ember is its warm partner for gradients
+   and hovers; azure is held back for links and quiet metadata.
+
+   Names are deliberately brand-specific (ink/gold/ember/azure) so they never
+   shadow Tailwind's own palettes — `gold-500` is always ours, never a default.
+   ========================================================================= */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
   --font-open-sans: var(--font-open-sans);
   --font-raleway: var(--font-raleway);
 }
+
 @theme {
-  /* --- CUSTOM BREAKPOINTS / SCREENS --- */
-  --breakpoint-8k: 7680px;
-  --breakpoint-tv-wide: 4096px;
-  --breakpoint-6xl: 3840px;
-  --breakpoint-5xl: 3200px;
-  --breakpoint-4xl: 2560px;
-  --breakpoint-3xl: 1920px;
-  --breakpoint-2xl: 1536px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-md: 768px;
-  --breakpoint-sm: 640px;
+  /* --- BREAKPOINTS --- */
   --breakpoint-xs: 480px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  --breakpoint-3xl: 1920px;
+  --breakpoint-4xl: 2560px;
+  --breakpoint-5xl: 3200px;
 
-  /* --- CUSTOM ANIMATIONS --- */
-  --animate-spin: spin 1s linear infinite;
-  --animate-fadeIn: fade-in 0.5s ease forwards;
+  /* --- INK: the canvas, deepest to lightest --- */
+  --color-ink-950: #05070a;
+  --color-ink-900: #080b11;
+  --color-ink-850: #0c1017;
+  --color-ink-800: #11161f;
+  --color-ink-700: #1a212c;
+  --color-ink-600: #27303e;
+  --color-ink-500: #3b4655;
 
-  /* --- CUSTOM KEYFRAMES --- */
+  /* --- GOLD: hero accent (brand #FFA202) --- */
+  --color-gold-300: #ffd27a;
+  --color-gold-400: #ffbb3d;
+  --color-gold-500: #ffa202;
+  --color-gold-600: #e08a00;
+
+  /* --- EMBER: gradients + hovers (brand #F34800) --- */
+  --color-ember-400: #ff6a2b;
+  --color-ember-500: #f34800;
+  --color-ember-600: #cc3c00;
+
+  /* --- AZURE: links, metadata, cool counterweight (brand #1e92c0) --- */
+  --color-azure-400: #4bb3da;
+  --color-azure-500: #1e92c0;
+  --color-azure-600: #16749b;
+
+  /* --- NAVY: legacy brand, retained for any light surface --- */
+  --color-navy-500: #013954;
+  --color-navy-700: #012232;
+
+  /* --- TEXT on ink --- */
+  --color-cream: #f6f4f0;
+  --color-mist: #9aa5b4;
+  --color-faint: #616d7e;
+
+  /* --- MOTION --- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-ken-burns: ken-burns 20s ease-in-out infinite alternate;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 2.4s ease-out infinite;
+  --animate-scroll-hint: scroll-hint 2s ease-in-out infinite;
+  --animate-grain: grain 8s steps(6) infinite;
+  --animate-spin-slow: spin 18s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @keyframes ken-burns {
+    from { transform: scale(1.02) translate3d(0, 0, 0); }
+    to   { transform: scale(1.14) translate3d(-1.5%, -1.5%, 0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+  }
+  @keyframes pulse-ring {
+    0%        { transform: scale(0.9); opacity: 0.7; }
+    70%, 100% { transform: scale(1.4); opacity: 0; }
+  }
+  @keyframes scroll-hint {
+    0%   { transform: translateY(0); opacity: 0; }
+    35%  { opacity: 1; }
+    100% { transform: translateY(12px); opacity: 0; }
+  }
+  @keyframes grain {
+    0%, 100% { transform: translate(0, 0); }
+    20%  { transform: translate(-3%, 4%); }
+    40%  { transform: translate(2%, -5%); }
+    60%  { transform: translate(-4%, -2%); }
+    80%  { transform: translate(5%, 3%); }
+  }
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  @keyframes fade-in {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-
-  /* --- CUSTOM COLORS --- */
-  --color-primary-50: #F2F5F6;
-  --color-primary-100: #E6EBEE;
-  --color-primary-200: #C0CED4;
-  --color-primary-300: #99B0BB;
-  --color-primary-400: #4D7487;
-  --color-primary-500: #013954;
-  --color-primary-600: #01334C;
-  --color-primary-700: #012232;
-  --color-primary-800: #001A26;
-  --color-primary-900: #001119;
-
-  /* Typo fixed: customOriange -> customOrange */
-  --color-customOrange-100: #FFA202;
-  --color-customOrange-200: #F34800;
-
-  --color-light-brown: #C4A484;
-
-  /* Accent blue used on the reference ibeststudios.com site (links, underlines) */
-  --color-accent-blue: #1e92c0;
-  --color-body-text: #3f3f3f;
-}
-@utility hide-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
-
-  &::-webkit-scrollbar {
-    display: none;           /* Chrome, Safari, and Opera */
+    to { transform: rotate(360deg); }
   }
 }
+
+/* =========================================================================
+   BASE
+   ========================================================================= */
+
+html {
+  scroll-behavior: smooth;
+  /* Keeps a #anchor target clear of the fixed navbar. */
+  scroll-padding-top: 6rem;
+  background: var(--color-ink-950);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ink-950);
+  color: var(--color-cream);
+  font-family: var(--font-open-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-gold-500);
+  color: var(--color-ink-950);
+}
+
+/* Scrollbar tuned to the canvas so it doesn't flash white on dark pages. */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-ink-900); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-600);
+  border-radius: 999px;
+  border: 2px solid var(--color-ink-900);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-ink-500); }
+
+:focus-visible {
+  outline: 2px solid var(--color-gold-500);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* =========================================================================
+   UTILITIES
+   ========================================================================= */
+
+@utility hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* Display type — the big Raleway headlines. */
+@utility display {
+  font-family: var(--font-raleway), system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  text-wrap: balance;
+}
+
+/* The gold→ember wash used on hero words and section accents. */
+@utility text-gradient-gold {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-gold-400) 0%,
+    var(--color-gold-500) 35%,
+    var(--color-ember-500) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Hairline card surface — reads on ink without looking like a boxed-in card. */
+@utility surface {
+  background: color-mix(in oklab, var(--color-ink-800) 70%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-cream) 8%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+/* Film grain — sits above imagery, below content. */
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: var(--animate-grain);
+  }
+}
+
+/* Underline that wipes in from the left, out to the right. */
+@utility link-underline {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s var(--ease-out-expo);
+  }
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Google's embed only ships a light theme. Inverting it and rotating the hue a
+   half-turn puts the map back to roughly its original colours but on a dark
+   ground, so it sits on the ink canvas instead of punching a white hole in it. */
+@utility map-dark {
+  filter: invert(0.92) hue-rotate(180deg) contrast(0.88) saturate(0.7)
+    brightness(0.95);
+}
+
+/* Edge fade for marquees and horizontal scrollers. */
+@utility mask-fade-x {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
+/* =========================================================================
+   ACCESSIBILITY
+   Anyone asking for less motion gets none of the ambient loops. Framer Motion
+   reads this same preference via useReducedMotion.
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

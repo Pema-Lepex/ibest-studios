@@ -1,0 +1,12 @@
+export { default as WorkNgeGiCharoGangzi } from "./nge-gi-charo-gangzi.jpg";
+export { default as WorkSamphel3 } from "./samphel-3.jpg";
+export { default as WorkDragonTales } from "./dragon-tales.jpg";
+export { default as WorkPeldenDrukpa } from "./pelden-drukpa.jpg";
+export { default as WorkQrCode } from "./qr-code.jpg";
+export { default as WorkELearningVideo } from "./elearning-video.jpg";
+export { default as WorkBhutanTalks } from "./bhutan-talks.jpg";
+export { default as WorkDziMitoGu } from "./dzi-mito-gu.jpg";
+export { default as WorkNewNormal } from "./new-normal.jpg";
+export { default as WorkPemiTshewangTashi } from "./pemi-tshewang-tashi.jpg";
+export { default as WorkWaterIsHappiness } from "./water-is-happiness.jpg";
+export { default as WorkAchoKhegpa } from "./acho-khegpa.jpg";

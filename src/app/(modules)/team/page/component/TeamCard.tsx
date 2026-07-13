@@ -1,43 +1,48 @@
-import { CommonParagraph2, Heading4 } from "@/components";
+"use client";
+
 import Image, { StaticImageData } from "next/image";
+import { Tilt } from "@/components/motion";
 
 interface TeamMemberCardProps {
   name: string;
   designation: string;
+  bio?: string;
   image: string | StaticImageData;
 }
 
-const TeamMemberCard = ({
+export default function TeamMemberCard({
   name,
   designation,
+  bio,
   image,
-}: TeamMemberCardProps) => {
+}: TeamMemberCardProps) {
   return (
-    <div className="relative mx-auto mt-24 w-full max-w-sm">
-      {/* Card */}
-      <div className="rounded-[36px] border border-gray-200 bg-white px-8 pb-12 pt-32 text-center shadow-sm transition-all duration-300 hover:shadow-lg">
-        <Heading4 className="text-primary-700">
-          {name}
-        </Heading4>
-
-        <CommonParagraph2 className="text-primary-500">
-          {designation}
-        </CommonParagraph2>
-      </div>
-
-      {/* Profile Image */}
-      <div className="absolute left-1/2 top-0 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary-100 p-3 shadow-md">
-        <div className="relative h-full w-full overflow-hidden rounded-full">
+    <Tilt max={5} className="h-full perspective-[1000px]">
+      <div className="group relative h-full overflow-hidden rounded-2xl border border-cream/10 bg-ink-850 transition-colors duration-500 hover:border-gold-500/40">
+        <div className="relative aspect-4/5 overflow-hidden">
           <Image
             src={image}
             alt={name}
             fill
-            className="object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover object-top grayscale transition-all duration-700 ease-out-expo group-hover:scale-105 group-hover:grayscale-0"
           />
+          <div className="absolute inset-0 bg-linear-to-t from-ink-850 via-ink-850/20 to-transparent" />
+        </div>
+
+        {/* Name plate lifts over the photo's lower edge. */}
+        <div className="relative -mt-16 p-6">
+          <h3 className="font-raleway text-xl font-bold text-cream transition-colors duration-300 group-hover:text-gold-500">
+            {name}
+          </h3>
+          <p className="mt-1 text-xs uppercase tracking-widest text-gold-500">
+            {designation}
+          </p>
+          {bio && (
+            <p className="mt-4 text-sm leading-relaxed text-mist">{bio}</p>
+          )}
         </div>
       </div>
-    </div>
+    </Tilt>
   );
-};
-
-export default TeamMemberCard;
+}
