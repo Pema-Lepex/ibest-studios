@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+/* iBEST brand: navy + red from the logo (shared with Educare Skill), with Educare's warm orange and sunny yellow */
+@theme {
+  --color-abyss: #00111a;
+  --color-deep: #011f2e;
+  --color-navy: #013954;
+  --color-sea: #0b5a80;
+  --color-sky: #2a8fd6;
+  --color-ice: #bfe6ff;
+  --color-red: #e3262b;
+  --color-ember: #c41a20;
+  --color-orange: #f7941d;
+  --color-sun: #ffc928;
+  --color-cream: #fff8ef;
+  --color-paper: #f6efe4;
+  --font-display: var(--font-bricolage);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+  --animate-marquee: marquee 50s linear infinite;
+  --animate-marquee-rev: marquee 50s linear infinite reverse;
+  --animate-marquee-fast: marquee 30s linear infinite;
+  --animate-blink: blink 1s steps(2, start) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes blink {
+  to { visibility: hidden; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+@keyframes drift {
+  from { transform: translate3d(-10%, 0, 0); }
+  to { transform: translate3d(110vw, 0, 0); }
+}
+
+html {
+  background: var(--color-abyss);
+  color: var(--color-cream);
+  -webkit-tap-highlight-color: transparent;
+  /* clip (not hidden) so wide marquees never widen the mobile layout viewport */
+  overflow-x: clip;
+}
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: clip;
+}
+
+/* keep anchored sections (e.g. /#services) clear of the sticky header */
+section[id], footer[id] { scroll-margin-top: 4.5rem; }
+@media (min-width: 1024px) { section[id], footer[id] { scroll-margin-top: 5.25rem; } }
+
+::selection { background: var(--color-red); color: white; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* soft repeating cloud motif inspired by Bhutanese textile & painting */
+.cloud-pattern {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'><path d='M10 40c0-8 7-14 15-14 2-8 9-13 17-13 9 0 16 6 17 14 7 0 13 6 13 13H10z' fill='none' stroke='%23ffffff' stroke-opacity='0.06' stroke-width='2'/><path d='M70 20c0-5 4-9 9-9 1-5 6-8 11-8 6 0 10 4 11 9 4 0 8 4 8 8H70z' fill='none' stroke='%23ffffff' stroke-opacity='0.05' stroke-width='2'/></svg>");
+}
+
+.star {
+  position: absolute;
+  border-radius: 9999px;
+  background: white;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* first-screen entrances run without JavaScript, so content is never hidden while scripts load */
+.rise { animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.rise-word { animation: rise-word 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+}
+
+@keyframes rise-word {
+  from { transform: translateY(110%) rotate(4deg); }
+}
+
+@keyframes shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -150% 0; }
+}
+
+@keyframes grow {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* if scripts never run, the intro screen still gets out of the way */
+@keyframes loader-failsafe {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
