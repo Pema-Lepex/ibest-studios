@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { showreelId, showreelStart, site } from "@/data/site";
-import { isConstrained, whenPageIdle } from "./idle";
+import { isDataSaving, whenPageIdle } from "./idle";
 import { SplitText } from "./motion";
 import { useIntro } from "./Providers";
 import VideoLoop from "./VideoLoop";
@@ -21,7 +21,7 @@ const STARS = Array.from({ length: 40 }, (_, i) => ({
 }));
 
 export default function Hero() {
-  const { scrollTo } = useIntro();
+  const { scrollTo, ready } = useIntro();
   const [scene, setScene] = useState(false);
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -30,10 +30,17 @@ export default function Hero() {
   const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
 
-  // the 3D scene is the heaviest download on the site, so it waits until the page is usable
+  // the 3D scene is the heaviest download on the site, so it waits until the page is usable,
+  // but never for long: on a slow reload the full page load can take many seconds
   useEffect(() => {
-    if (isConstrained()) return;
-    return whenPageIdle(() => setScene(true));
+    if (isDataSaving()) return;
+    const start = () => setScene(true);
+    const cancelIdle = whenPageIdle(start);
+    const timer = setTimeout(start, 2000);
+    return () => {
+      cancelIdle();
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
@@ -58,7 +65,7 @@ export default function Hero() {
           className="relative order-1 h-[40svh] min-h-[260px] w-full sm:h-[46svh] lg:order-2 lg:h-[72vh] lg:max-h-[720px]"
         >
           {scene ? (
-            <HeroScene />
+            <HeroScene greet={ready} />
           ) : (
             // eslint-disable-next-line @next/next/no-img-element
             <img src="/img/logo-original.webp" alt="" className="rise absolute left-1/2 top-1/2 h-32 w-auto -translate-x-1/2 -translate-y-1/2 sm:h-44" />

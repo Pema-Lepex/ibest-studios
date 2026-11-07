@@ -9,10 +9,12 @@ export default function Stage({
   children,
   camera = { position: [0, 0, 6] as [number, number, number], fov: 40 },
   className = "",
+  dpr = [1, 1.5],
 }: {
   children: React.ReactNode;
   camera?: { position: [number, number, number]; fov: number };
   className?: string;
+  dpr?: [number, number];
 }) {
   const wrap = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -29,7 +31,7 @@ export default function Stage({
     <div ref={wrap} className={className}>
       <Canvas
         frameloop={visible ? "always" : "never"}
-        dpr={[1, 1.5]}
+        dpr={dpr}
         camera={camera}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         style={{ touchAction: "pan-y" }}

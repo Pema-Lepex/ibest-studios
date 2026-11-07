@@ -7,6 +7,13 @@ export function isConstrained() {
   return !!c?.saveData || /2g|3g/.test(c?.effectiveType ?? "") || (nav.deviceMemory ?? 8) <= 2;
 }
 
+/** True when the visitor asked to save data, is on 2G, or the device is low on memory. Slower 3G-class links still get the 3D. */
+export function isDataSaving() {
+  const nav = navigator as Navigator & { connection?: Conn; deviceMemory?: number };
+  const c = nav.connection;
+  return !!c?.saveData || /2g/.test(c?.effectiveType ?? "") || (nav.deviceMemory ?? 8) <= 2;
+}
+
 /** True on a connection too slow to spend on decorative background video. Unknown connections count as fast. */
 export function isBelowFastConnection() {
   const c = (navigator as Navigator & { connection?: { downlink?: number } }).connection;
